@@ -8,7 +8,7 @@
 import Foundation
 
 // TODO: Ingredients and measurements can be duplicated, need to come up with id...
-struct Ingredient: Identifiable {
+struct Ingredient: Identifiable, Equatable {
     let name: String
     let measurement: String?
     

@@ -36,6 +36,7 @@
 		EEC4A3B12C8D542D009F5B27 /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4A3B02C8D542D009F5B27 /* JSONLoader.swift */; };
 		EEC4A3B42C8D54B4009F5B27 /* Recipe+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4A3B32C8D54B4009F5B27 /* Recipe+Preview.swift */; };
 		EEC4A3B62C8D54BF009F5B27 /* RecipeDetails+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4A3B52C8D54BF009F5B27 /* RecipeDetails+Preview.swift */; };
+		EEC4A3BF2C8DE647009F5B27 /* Alert+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC4A3BE2C8DE647009F5B27 /* Alert+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		EEC4A3B02C8D542D009F5B27 /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		EEC4A3B32C8D54B4009F5B27 /* Recipe+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+Preview.swift"; sourceTree = "<group>"; };
 		EEC4A3B52C8D54BF009F5B27 /* RecipeDetails+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeDetails+Preview.swift"; sourceTree = "<group>"; };
+		EEC4A3BE2C8DE647009F5B27 /* Alert+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				EEC4A3862C89433F009F5B27 /* Container+Extensions.swift */,
+				EEC4A3BE2C8DE647009F5B27 /* Alert+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				EEC4A3A32C8D3FEB009F5B27 /* ViewModelState.swift in Sources */,
 				EEC4A3742C893585009F5B27 /* Recipe.swift in Sources */,
 				EEC4A37F2C893837009F5B27 /* RecipesListViewModel.swift in Sources */,
+				EEC4A3BF2C8DE647009F5B27 /* Alert+Extensions.swift in Sources */,
 				EEC4A3B62C8D54BF009F5B27 /* RecipeDetails+Preview.swift in Sources */,
 				EEC4A39A2C8A919F009F5B27 /* RecipeDetailsDTO.swift in Sources */,
 				EEC4A3A72C8D432C009F5B27 /* NetworkError.swift in Sources */,

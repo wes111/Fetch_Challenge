@@ -15,6 +15,7 @@ final class RecipeDetailViewModel {
     private var recipeService
     
     var state: ViewModelState<RecipeDetails> = .idle
+    var showAlert: Bool = false
     private let recipe: Recipe
     
     init(recipe: Recipe) {

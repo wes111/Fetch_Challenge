@@ -22,6 +22,14 @@ struct RecipesListView: View {
         .task {
             await viewModel.fetchDesserts()
         }
+        .onChange(of: viewModel.state) { _, newValue in
+            if case .failed = newValue {
+                viewModel.showAlert = true
+            }
+        }
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert.genericAlert
+        }
     }
 }
 

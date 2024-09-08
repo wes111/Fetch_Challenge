@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum RecipeCategory: String, Codable {
+enum RecipeCategory: String, Codable, Equatable {
     case dessert = "Dessert"
 }

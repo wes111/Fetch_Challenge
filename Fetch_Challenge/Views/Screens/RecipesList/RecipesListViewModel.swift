@@ -15,6 +15,7 @@ final class RecipesListViewModel {
     private var recipeService
     
     var state: ViewModelState<[Recipe]> = .idle
+    var showAlert: Bool = false
 }
 
 // MARK: - Methods
