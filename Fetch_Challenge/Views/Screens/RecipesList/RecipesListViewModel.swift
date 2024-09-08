@@ -10,7 +10,10 @@ import Foundation
 
 @Observable @MainActor
 final class RecipesListViewModel {
-    @ObservationIgnored @Injected(\.recipeService) private var recipeService
+    @ObservationIgnored
+    @Injected(\.recipeService)
+    private var recipeService
+    
     var state: ViewModelState<[Recipe]> = .idle
 }
 

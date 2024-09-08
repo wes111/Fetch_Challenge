@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct IngredientDTO: Codable {
+    let name: String
+    let measurement: String?
+    
+    func toIngredient() -> Ingredient {
+        .init(name: name, measurement: measurement)
+    }
+}

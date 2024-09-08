@@ -9,7 +9,8 @@ import SwiftUI
 
 @MainActor
 struct RecipeDetailView: View {
-    @State private var viewModel: RecipeDetailViewModel
+    @State
+    private var viewModel: RecipeDetailViewModel
     
     init(recipe: Recipe) {
         self.viewModel = .init(recipe: recipe)
@@ -27,13 +28,30 @@ struct RecipeDetailView: View {
 
 // MARK: - Subviews
 private extension RecipeDetailView {
+    
     var content: some View {
+        VStack {
+            switch viewModel.state {
+            case .idle, .refreshing, .failed:
+                EmptyView()  // TODO: Create views as necessary for these states.
+                
+            case .loading:
+                ProgressView()
+                    .controlSize(.large)
+                
+            case .success(let recipeDetails):
+                recipeDetailsView(recipeDetails)
+            }
+        }
+    }
+    
+    func recipeDetailsView(_ details: RecipeDetails) -> some View {
         ScrollView {
             VStack {
-                Text(viewModel.recipeDetails?.instructions ?? "")
+                Text(details.instructions)
                     .recipeSection(title: "Instructions")
                 
-                ForEach(viewModel.recipeDetails?.ingredients ?? []) { ingredient in
+                ForEach(details.ingredients) { ingredient in
                     Text("\(ingredient.measurement ?? "") \(ingredient.name)")
                 }
                 .recipeSection(title: "Ingredients")

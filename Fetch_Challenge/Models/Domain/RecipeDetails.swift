@@ -7,12 +7,10 @@
 
 import Foundation
 
-struct RecipeDetails: Codable {
-    let name: String
+struct RecipeDetails {
     let id: String
-    let category: RecipeCategory
+    let name: String
     let instructions: String
-    
-    // measurements
-    // ingredients
+    let category: RecipeCategory
+    let ingredients: [Ingredient]
 }

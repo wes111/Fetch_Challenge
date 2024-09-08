@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct MealsListDTO<Item: Decodable>: Decodable {
+    let items: [Item]
+    
+    enum CodingKeys: String, CodingKey {
+        case items = "meals"
+    }
+}

@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import Factory
+
+extension Container {
+    
+    var networkService: Factory<NetworkService> {
+        self { NetworkServiceDefault() }.scope(.shared)
+    }
+    
+    var recipeService: Factory<RecipeService> {
+        self { RecipeServiceDefault() }.scope(.shared)
+    }
+}

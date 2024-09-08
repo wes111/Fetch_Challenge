@@ -10,7 +10,8 @@ import SwiftData
 
 @MainActor
 struct RecipesListView: View {
-    @State private var viewModel = RecipesListViewModel()
+    @State
+    private var viewModel = RecipesListViewModel()
     
     var body: some View {
         NavigationStack {
@@ -23,21 +24,22 @@ struct RecipesListView: View {
     }
 }
 
-// MARK: Subviews
+// MARK: - Subviews
 private extension RecipesListView {
     
-    @ViewBuilder
     var content: some View {
-        switch viewModel.state {
-        case .idle, .refreshing, .failed:
-            EmptyView() // TODO: Create views as necessary for these states.
-            
-        case .loading:
-            ProgressView()
-                .controlSize(.large)
-            
-        case .success(let recipes):
-            recipeList(recipes)
+        VStack {
+            switch viewModel.state {
+            case .idle, .refreshing, .failed:
+                EmptyView() // TODO: Create views as necessary for these states.
+                
+            case .loading:
+                ProgressView()
+                    .controlSize(.large)
+                
+            case .success(let recipes):
+                recipeList(recipes)
+            }
         }
     }
     

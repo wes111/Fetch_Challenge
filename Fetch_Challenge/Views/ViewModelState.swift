@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+enum ViewModelState<T> {
+    case idle
+    case loading
+    case refreshing
+    case success(data: T)
+    case failed(error: Error)
+}

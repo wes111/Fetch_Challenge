@@ -10,13 +10,21 @@ import Foundation
 
 protocol RecipeService {
     func fetchDessertRecipes() async throws -> [Recipe]
+    func fetchRecipeDetails(recipeId: String) async throws -> RecipeDetails?
 }
 
 final class RecipeServiceDefault: RecipeService {
-    @Injected(\.networkManager) private var networkManager
+    @Injected(\.networkService) private var networkManager
     
     func fetchDessertRecipes() async throws -> [Recipe] {
-        let mealsDTO: MealsListDTO = try await networkManager.fetch(.meals(category: .dessert))
+        let mealsDTO: MealsListDTO<RecipeDTO> = try await networkManager.fetch(.meals(category: .dessert))
+        try await Task.sleep(nanoseconds: 2_000_000_000)
         return mealsDTO.items.map { $0.toRecipe() }
+    }
+    
+    func fetchRecipeDetails(recipeId: String) async throws -> RecipeDetails? {
+        let mealsDTO: MealsListDTO<RecipeDetailsDTO> = try await networkManager.fetch(.recipeDetails(id: recipeId))
+        try await Task.sleep(nanoseconds: 2_000_000_000)
+        return mealsDTO.items.first?.toRecipeDetails()
     }
 }

@@ -7,20 +7,13 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case invalidRequestURL
-    case invalidResponse
-    case invalidStatusCode(Int)
-    case unknownError
-}
-
 protocol NetworkService {
-    func fetch<T: Codable>(_ request: Request) async throws -> T
+    func fetch<T: Decodable>(_ request: RecipeAPIRequest) async throws -> T
 }
 
 final class NetworkServiceDefault: NetworkService {
     
-    func fetch<T: Codable>(_ request: Request) async throws -> T {
+    func fetch<T: Decodable>(_ request: RecipeAPIRequest) async throws -> T {
         guard let url = request.url else {
             throw NetworkError.invalidRequestURL
         }

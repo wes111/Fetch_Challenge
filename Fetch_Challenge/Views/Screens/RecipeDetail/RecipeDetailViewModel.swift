@@ -10,8 +10,11 @@ import Foundation
 
 @Observable @MainActor
 final class RecipeDetailViewModel {
-    @ObservationIgnored @Injected(\.recipeService) private var recipeService
-    var recipeDetails: RecipeDetails?
+    @ObservationIgnored
+    @Injected(\.recipeService)
+    private var recipeService
+    
+    var state: ViewModelState<RecipeDetails> = .idle
     private let recipe: Recipe
     
     init(recipe: Recipe) {
@@ -28,10 +31,17 @@ extension RecipeDetailViewModel {
 
 // MARK: - Methods
 extension RecipeDetailViewModel {
+    
     func fetchDetails() async {
         do {
-            recipeDetails = try await recipeService.fetchRecipeDetails(for: recipe.id)
+            state = .loading
+            guard let details = try await recipeService.fetchRecipeDetails(recipeId: recipe.id) else {
+                state = .failed(error: TheMealDBError.missingDetails)
+                return
+            }
+            state = .success(data: details)
         } catch {
+            state = .failed(error: error)
             print(error)
         }
     }
