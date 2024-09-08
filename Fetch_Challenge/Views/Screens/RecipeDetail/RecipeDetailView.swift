@@ -53,14 +53,25 @@ private extension RecipeDetailView {
                     .recipeSection(title: "Instructions")
                 
                 ForEach(details.ingredients) { ingredient in
-                    Text("\(ingredient.measurement ?? "") \(ingredient.name)")
+                    ingredientView(ingredient)
                 }
                 .recipeSection(title: "Ingredients")
             }
             .multilineTextAlignment(.leading)
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .scrollBounceBehavior(.basedOnSize, axes: [.vertical])
+    }
+    
+    func ingredientView(_ ingredient: Ingredient) -> some View {
+        VStack(alignment: .leading) {
+            Text(ingredient.name)
+                .font(.body)
+            Text(ingredient.measurement ?? "")
+                .font(.caption)
+                .fontWeight(.light)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.bottom, 3)
     }
 }
 
