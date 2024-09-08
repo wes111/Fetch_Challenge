@@ -14,16 +14,16 @@ protocol RecipeService {
 }
 
 final class RecipeServiceDefault: RecipeService {
-    @Injected(\.networkService) private var networkManager
+    @Injected(\.networkService) private var networkService
     
     func fetchDessertRecipes() async throws -> [Recipe] {
-        let mealsDTO: MealsListDTO<RecipeDTO> = try await networkManager.fetch(.meals(category: .dessert))
+        let mealsDTO: MealsListDTO<RecipeDTO> = try await networkService.fetch(.meals(category: .dessert))
         try await Task.sleep(nanoseconds: 2_000_000_000)
         return mealsDTO.items.map { $0.toRecipe() }
     }
     
     func fetchRecipeDetails(recipeId: String) async throws -> RecipeDetails? {
-        let mealsDTO: MealsListDTO<RecipeDetailsDTO> = try await networkManager.fetch(.recipeDetails(id: recipeId))
+        let mealsDTO: MealsListDTO<RecipeDetailsDTO> = try await networkService.fetch(.recipeDetails(id: recipeId))
         try await Task.sleep(nanoseconds: 2_000_000_000)
         return mealsDTO.items.first?.toRecipeDetails()
     }

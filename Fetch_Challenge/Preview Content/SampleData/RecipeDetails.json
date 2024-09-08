@@ -1,0 +1,25 @@
+{
+    "idMeal": "12345",
+    "strMeal": "Chocolate Cake",
+    "strCategory": "Dessert",
+    "strInstructions": "Mix ingredients and bake for 30 minutes.",
+    "strMealThumb": "https://example.com/chocolate_cake.jpg",
+    
+    "strIngredient1": "Flour",
+    "strIngredient2": "Sugar",
+    "strIngredient3": "Cocoa Powder",
+    "strIngredient4": "Eggs",
+    "strIngredient5": "Butter",
+    "strIngredient6": "Baking Powder",
+    "strIngredient7": "Salt",
+    "strIngredient8": "Vanilla Extract",
+    
+    "strMeasure1": "2 cups",
+    "strMeasure2": "1 cup",
+    "strMeasure3": "1/2 cup",
+    "strMeasure4": "2",
+    "strMeasure5": "1/2 cup",
+    "strMeasure6": "1 tsp",
+    "strMeasure7": "1/4 tsp",
+    "strMeasure8": "1 tsp"
+}

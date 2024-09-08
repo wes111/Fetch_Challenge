@@ -5,6 +5,7 @@
 //  Created by Wesley Luntsford on 9/4/24.
 //
 
+import Factory
 import SwiftUI
 
 @MainActor
@@ -65,7 +66,9 @@ private extension RecipeDetailView {
 
 // MARK: - Preview
 #Preview {
-    NavigationStack {
-        RecipeDetailView(recipe: .init(id: "53049", name: "", thumbnailUrl: nil))
+    let _ = Container.shared.recipeService.register { MockRecipeService() }
+    
+    return NavigationStack {
+        RecipeDetailView(recipe: .preview)
     }
 }

@@ -1,0 +1,12 @@
+[
+    {
+        "idMeal": "12345",
+        "strMeal": "Chocolate Cake",
+        "strMealThumb": "https://example.com/chocolate_cake.jpg"
+    },
+    {
+        "idMeal": "67890",
+        "strMeal": "Apple Pie",
+        "strMealThumb": "https://example.com/apple_pie.jpg"
+    }
+]

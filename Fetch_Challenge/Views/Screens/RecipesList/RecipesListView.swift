@@ -5,6 +5,7 @@
 //  Created by Wesley Luntsford on 9/4/24.
 //
 
+import Factory
 import SwiftUI
 import SwiftData
 
@@ -16,7 +17,7 @@ struct RecipesListView: View {
     var body: some View {
         NavigationStack {
             content
-                .navigationTitle("Desserts")
+                .navigationTitle("Fetch Desserts")
         }
         .task {
             await viewModel.fetchDesserts()
@@ -27,19 +28,18 @@ struct RecipesListView: View {
 // MARK: - Subviews
 private extension RecipesListView {
     
+    @ViewBuilder
     var content: some View {
-        VStack {
-            switch viewModel.state {
-            case .idle, .refreshing, .failed:
-                EmptyView() // TODO: Create views as necessary for these states.
-                
-            case .loading:
-                ProgressView()
-                    .controlSize(.large)
-                
-            case .success(let recipes):
-                recipeList(recipes)
-            }
+        switch viewModel.state {
+        case .idle, .refreshing, .failed:
+            EmptyView() // TODO: Create views as necessary for these states.
+            
+        case .loading:
+            ProgressView()
+                .controlSize(.large)
+            
+        case .success(let recipes):
+            recipeList(recipes)
         }
     }
     
@@ -62,5 +62,6 @@ private extension RecipesListView {
 
 // MARK: - Preview
 #Preview {
-    RecipesListView()
+    let _ = Container.shared.recipeService.register { MockRecipeService() }
+    return RecipesListView()
 }
