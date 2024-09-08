@@ -10,8 +10,6 @@ import SwiftData
 
 // TODOs:
 // Persistence
-// Error handling
-// Make sure to meet requirements in doc.
 @main
 struct FetchChallengeApp: App {
     var body: some Scene {

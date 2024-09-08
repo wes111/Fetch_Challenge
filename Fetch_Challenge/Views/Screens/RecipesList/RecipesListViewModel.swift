@@ -25,7 +25,7 @@ extension RecipesListViewModel {
         do {
             state = .loading
             let recipes = try await recipeService.fetchDessertRecipes()
-            state = .success(data: recipes)
+            state = .success(data: recipes.sorted(by: { $1.name > $0.name }))
         } catch {
             state = .failed(error: error)
             print(error)
