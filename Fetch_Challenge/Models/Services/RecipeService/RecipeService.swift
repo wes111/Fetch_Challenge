@@ -18,14 +18,20 @@ final class RecipeServiceDefault: RecipeService {
     
     func fetchDessertRecipes() async throws -> [Recipe] {
         let mealsDTO: MealsListDTO<RecipeDTO> = try await networkService.fetch(.meals(category: .dessert))
-        return mealsDTO.items.map { $0.toRecipe() }
+        return mealsDTO.items.map { $0.toRecipe() }.filter { !$0.name.isEmpty && !$0.id.isEmpty }
     }
     
     func fetchRecipeDetails(recipeId: String) async throws -> RecipeDetails {
         let mealsDTO: MealsListDTO<RecipeDetailsDTO> = try await networkService.fetch(.recipeDetails(id: recipeId))
-        guard let recipeDetails = mealsDTO.items.first?.toRecipeDetails() else {
+        
+        let recipeDetails = mealsDTO.items
+            .filter { !$0.id.isEmpty && !$0.ingredients.isEmpty && !$0.instructions.isEmpty }
+            .first?.toRecipeDetails()
+        
+        guard let recipeDetails else {
             throw RecipeServiceError.missingRecipeDetails
         }
+        
         return recipeDetails
     }
 }

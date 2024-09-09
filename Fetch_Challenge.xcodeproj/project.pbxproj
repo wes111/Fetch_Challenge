@@ -109,7 +109,6 @@
 			children = (
 				EEC4A3722C893576009F5B27 /* Models */,
 				EEC4A3772C893751009F5B27 /* Views */,
-				EEC4A38E2C8A814B009F5B27 /* Services */,
 				EEC4A3C52C8EA06F009F5B27 /* Utility */,
 				EEC4A3852C894330009F5B27 /* Extensions */,
 				EEC4A3682C89347A009F5B27 /* Assets.xcassets */,
@@ -133,6 +132,7 @@
 		EEC4A3722C893576009F5B27 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EEC4A38E2C8A814B009F5B27 /* Services */,
 				EEC4A3982C8A86AD009F5B27 /* Domain */,
 				EEC4A3912C8A85F8009F5B27 /* DTO */,
 			);
