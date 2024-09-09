@@ -8,12 +8,8 @@
 import Foundation
 
 enum NetworkError: Error {
-    case invalidRequestURL
+    case invalidURL
     case invalidResponse
     case invalidStatusCode(Int)
     case unknownError
-}
-
-enum TheMealDBError: Error {
-    case missingDetails
 }

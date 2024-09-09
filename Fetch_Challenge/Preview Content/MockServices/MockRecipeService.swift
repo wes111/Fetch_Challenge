@@ -12,7 +12,7 @@ final class MockRecipeService: RecipeService {
         Recipe.previewArray
     }
     
-    func fetchRecipeDetails(recipeId: String) async throws -> RecipeDetails? {
+    func fetchRecipeDetails(recipeId: String) async throws -> RecipeDetails {
         RecipeDetails.preview
     }
 }

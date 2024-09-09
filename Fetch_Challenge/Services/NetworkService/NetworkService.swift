@@ -8,14 +8,14 @@
 import Foundation
 
 protocol NetworkService {
-    func fetch<T: Decodable>(_ request: RecipeAPIRequest) async throws -> T
+    func fetch<T: Decodable>(_ endpoint: RecipeAPIEndpoint) async throws -> T
 }
 
 final class NetworkServiceDefault: NetworkService {
     
-    func fetch<T: Decodable>(_ request: RecipeAPIRequest) async throws -> T {
-        guard let url = request.url else {
-            throw NetworkError.invalidRequestURL
+    func fetch<T: Decodable>(_ endpoint: RecipeAPIEndpoint) async throws -> T {
+        guard let url = endpoint.url else {
+            throw NetworkError.invalidURL
         }
         
         let (data, response) = try await URLSession.shared.data(from: url)

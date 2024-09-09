@@ -6,10 +6,7 @@
 //
 
 import SwiftUI
-import SwiftData
 
-// TODOs:
-// Persistence
 @main
 struct FetchChallengeApp: App {
     var body: some Scene {

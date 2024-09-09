@@ -21,48 +21,6 @@ struct RecipeDetailsDTO: Decodable {
         case category = "strCategory"
         case instructions = "strInstructions"
         case thumbnailUrl = "strMealThumb"
-        
-        case ingredientOne = "strIngredient1"
-        case ingredientTwo = "strIngredient2"
-        case ingredientThree = "strIngredient3"
-        case ingredientFour = "strIngredient4"
-        case ingredientFive = "strIngredient5"
-        case ingredientSix = "strIngredient6"
-        case ingredientSeven = "strIngredient7"
-        case ingredientEight = "strIngredient8"
-        case ingredientNine = "strIngredient9"
-        case ingredientTen = "strIngredient10"
-        case ingredientEleven = "strIngredient11"
-        case ingredientTwelve = "strIngredient12"
-        case ingredientThirteen = "strIngredient13"
-        case ingredientFourteen = "strIngredient14"
-        case ingredientFifteen = "strIngredient15"
-        case ingredientSixteen = "strIngredient16"
-        case ingredientSeventeen = "strIngredient17"
-        case ingredientEighteen = "strIngredient18"
-        case ingredientNineteen = "strIngredient19"
-        case ingredientTwenty = "strIngredient20"
-        
-        case measurementOne = "strMeasure1"
-        case measurementTwo = "strMeasure2"
-        case measurementThree = "strMeasure3"
-        case measurementFour = "strMeasure4"
-        case measurementFive = "strMeasure5"
-        case measurementSix = "strMeasure6"
-        case measurementSeven = "strMeasure7"
-        case measurementEight = "strMeasure8"
-        case measurementNine = "strMeasure9"
-        case measurementTen = "strMeasure10"
-        case measurementEleven = "strMeasure11"
-        case measurementTwelve = "strMeasure12"
-        case measurementThirteen = "strMeasure13"
-        case measurementFourteen = "strMeasure14"
-        case measurementFifteen = "strMeasure15"
-        case measurementSixteen = "strMeasure16"
-        case measurementSeventeen = "strMeasure17"
-        case measurementEighteen = "strMeasure18"
-        case measurementNineteen = "strMeasure19"
-        case measurementTwenty = "strMeasure20"
     }
     
     init(from decoder: Decoder) throws {
@@ -73,38 +31,30 @@ struct RecipeDetailsDTO: Decodable {
         self.category = try container.decode(RecipeCategory.self, forKey: .category)
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.thumbnailUrl = try? container.decode(URL.self, forKey: .thumbnailUrl)
-        
-        let ingredientKeys: [CodingKeys] = [
-            .ingredientOne, .ingredientTwo, .ingredientThree, .ingredientFour, .ingredientFive,
-            .ingredientSix, .ingredientSeven, .ingredientEight, .ingredientNine, .ingredientTen,
-            .ingredientEleven, .ingredientTwelve, .ingredientThirteen, .ingredientFourteen, .ingredientFifteen,
-            .ingredientSixteen, .ingredientSeventeen, .ingredientEighteen, .ingredientNineteen, .ingredientTwenty
-        ]
-        
-        let measurementKeys: [CodingKeys] = [
-            .measurementOne, .measurementTwo, .measurementThree, .measurementFour, .measurementFive,
-            .measurementSix, .measurementSeven, .measurementEight, .measurementNine, .measurementTen,
-            .measurementEleven, .measurementTwelve, .measurementThirteen, .measurementFourteen, .measurementFifteen,
-            .measurementSixteen, .measurementSeventeen, .measurementEighteen, .measurementNineteen, .measurementTwenty
-        ]
-        
+        self.ingredients = try Self.decodeIngredients(from: decoder)
+    }
+    
+    private static func decodeIngredients(from decoder: Decoder) throws -> [IngredientDTO] {
         var ingredients: [IngredientDTO] = []
         
-        for (ingredientKey, measurementKey) in zip(ingredientKeys, measurementKeys) {
-            if let ingredientName = try? container.decodeIfPresent(String.self, forKey: ingredientKey),
-               !ingredientName.isEmpty {
-                let measurement = try? container.decodeIfPresent(String.self, forKey: measurementKey)
-                ingredients.append(IngredientDTO(name: ingredientName, measurement: measurement))
-            }
+        let container = try decoder.container(keyedBy: AnyStringKey.self)
+        var index = 1
+        
+        while
+            let ingredientName = try container.decodeIfPresent(String.self, forKey: AnyStringKey(stringValue: "strIngredient\(index)")),
+            !ingredientName.isEmpty
+        {
+            let measurement = try container.decodeIfPresent(String.self, forKey: AnyStringKey("strMeasure\(index)"))
+            ingredients.append(IngredientDTO(name: ingredientName, measurement: measurement))
+            index += 1
         }
         
-        self.ingredients = ingredients
+        return ingredients
     }
     
     func toRecipeDetails() -> RecipeDetails {
         .init(
             id: id,
-            name: name,
             instructions: instructions,
             category: category,
             ingredients: ingredients.map { $0.toIngredient() }

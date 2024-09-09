@@ -36,10 +36,7 @@ extension RecipeDetailViewModel {
     func fetchDetails() async {
         do {
             state = .loading
-            guard let details = try await recipeService.fetchRecipeDetails(recipeId: recipe.id) else {
-                state = .failed(error: TheMealDBError.missingDetails)
-                return
-            }
+            let details = try await recipeService.fetchRecipeDetails(recipeId: recipe.id)
             state = .success(data: details)
         } catch {
             state = .failed(error: error)

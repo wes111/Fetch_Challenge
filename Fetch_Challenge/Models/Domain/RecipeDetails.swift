@@ -9,7 +9,6 @@ import Foundation
 
 struct RecipeDetails: Equatable {
     let id: String
-    let name: String
     let instructions: String
     let category: RecipeCategory
     let ingredients: [Ingredient]
